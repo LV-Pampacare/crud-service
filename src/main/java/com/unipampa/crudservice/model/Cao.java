@@ -6,8 +6,6 @@ import lombok.Getter;
 
 import javax.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -38,12 +36,6 @@ public class Cao {
   @Column(nullable = false)
   private Boolean usaColeira;
 
-  @Column(nullable = false)
-  private Boolean lvc;
-
-  @Column(nullable = false)
-  private Boolean obito;
-
   @ManyToOne
   @JoinColumn(name = "proprietario_id", nullable = false)
   private Proprietario proprietario;
@@ -51,10 +43,4 @@ public class Cao {
   @OneToOne(mappedBy = "cao", cascade = CascadeType.ALL)
   @PrimaryKeyJoinColumn
   private Localizacao localizacao;
-
-  @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<Exame> exames = new ArrayList<Exame>();
-
-  @OneToMany(mappedBy = "sintoma", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<CaoSintoma> sintomas = new ArrayList<CaoSintoma>();
 }

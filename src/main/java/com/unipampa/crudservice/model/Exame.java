@@ -32,6 +32,6 @@ public class Exame {
   private String descricao;
 
   @ManyToOne
-  @JoinColumn(name="cao_id", nullable = false)
-  private Cao cao;
+  @JoinColumn(name="amostra_id", nullable = false)
+  private Amostra amostra;
 }

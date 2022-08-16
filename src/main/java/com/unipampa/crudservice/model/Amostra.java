@@ -6,7 +6,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -21,10 +23,20 @@ public class Amostra {
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
   private Date data;
 
+  @Column(nullable = false)
+  private Boolean lvc;
+
+  @Column(nullable = false)
+  private Boolean morreu;
+
   @OneToOne
   private Acao acao;
 
+  @OneToMany(mappedBy = "sintoma", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<AmostraSintoma> sintomas = new ArrayList<AmostraSintoma>();
 
+  @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Exame> exames = new ArrayList<Exame>();
 
 
 }

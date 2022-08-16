@@ -15,29 +15,13 @@ import java.util.List;
 @NoArgsConstructor
 public class AmostraDTO {
 
-    private Long numero;
-
     @NotBlank
-    private Boolean lvc;
-
+    private Proprietario proprietario;
+    
     @NotBlank
-    private Boolean morreu;
+    private Localizacao localizacoes;
 
     @NotBlank
     private List<Cao> caes;
 
-    @NotBlank
-    private Proprietario proprietario;
-
-    @NotBlank
-    private List<Sintoma> sintomas;
-
-    @NotBlank
-    private List<Exame> exames;
-
-    @NotBlank
-    private Acao acao;
-
-    @NotBlank
-    private Amostra amostra;
 }
