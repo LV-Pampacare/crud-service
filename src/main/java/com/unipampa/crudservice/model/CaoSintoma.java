@@ -14,10 +14,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-public class AmostraSintoma {
+public class CaoSintoma {
 
   @EmbeddedId
-  private AmostraSintomaId id;
+  private CaoSintomaId id;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @MapsId("amostraId")
@@ -31,11 +31,11 @@ public class AmostraSintoma {
 
   private int intensidade;
 
-  public AmostraSintoma(Amostra amostra, Sintoma sintoma, int intensidade) {
+  public CaoSintoma(Amostra amostra, Sintoma sintoma, int intensidade) {
     this.amostra = amostra;
     this.sintoma = sintoma;
     this.intensidade = intensidade;
-    this.id = new AmostraSintomaId(amostra.getId(), sintoma.getId());
+    this.id = new CaoSintomaId(amostra.getId(), sintoma.getId());
   }
 
 }

@@ -7,24 +7,24 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class AmostraSintomaId implements Serializable {
-    @Column(name="amostra_id")
-    private UUID amostraId;
+public class CaoSintomaId implements Serializable {
+    @Column(name="cao_id")
+    private UUID caoId;
 
     @Column(name="sintoma_id")
     private UUID sintomaId;
   
-    public AmostraSintomaId(UUID amostraId, UUID sintomaId){
-        this.amostraId = amostraId;
+    public CaoSintomaId(UUID caoId, UUID sintomaId){
+        this.caoId = caoId;
         this.sintomaId = sintomaId;
     }
-    public AmostraSintomaId(){
+    public CaoSintomaId(){
     }
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((amostraId == null) ? 0 : amostraId.hashCode());
+        result = prime * result + ((caoId == null) ? 0 : caoId.hashCode());
         result = prime * result + ((sintomaId == null) ? 0 : sintomaId.hashCode());
         return result;
     }
@@ -36,11 +36,11 @@ public class AmostraSintomaId implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        AmostraSintomaId other = (AmostraSintomaId) obj;
-        if (amostraId == null) {
-            if (other.amostraId != null)
+        CaoSintomaId other = (CaoSintomaId) obj;
+        if (caoId == null) {
+            if (other.caoId != null)
                 return false;
-        } else if (!amostraId.equals(other.amostraId))
+        } else if (!caoId.equals(other.caoId))
             return false;
         if (sintomaId == null) {
             if (other.sintomaId != null)
