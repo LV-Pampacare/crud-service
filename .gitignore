@@ -33,3 +33,6 @@ build/
 .vscode/
 
 storage/
+
+### Config Files ###
+application.yml
