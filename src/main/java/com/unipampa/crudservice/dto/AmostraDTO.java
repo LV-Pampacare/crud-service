@@ -17,7 +17,7 @@ public class AmostraDTO {
 
     @NotBlank
     private Proprietario proprietario;
-    
+
     @NotBlank
     private Localizacao localizacoes;
 
