@@ -31,12 +31,33 @@ public class AmostraController {
     private ISintomaService sintomaService;
 
 
+<<<<<<< HEAD
+    @Autowired
+    private IAcaoService acaoService;
+
+=======
+>>>>>>> b593bd38b4399ffdcd09b095227b945ecdaa9ff1
     @PostMapping("/inserir")
     public void salvarGeral(@RequestBody AmostraDTO dto){
 
         Proprietario proprietario = caputurarProprietario(dto);
+<<<<<<< HEAD
+
+        Amostra amostra = caputurarAmostra(dto);
+
+        Acao acao = capturarAcao(dto);
+
+        List<Cao> caes = dto.getProprietario().getCaes().stream().collect(Collectors.toList());
+
+        proprietario.setCaes(caes);
+        amostra.setAcao(acao);
+
+        salvarCaes(caes);
+        acaoService.salvarAcao(acao);
+=======
 
 
+>>>>>>> b593bd38b4399ffdcd09b095227b945ecdaa9ff1
         proprietarioService.salvarProprietario(proprietario);
     }
 

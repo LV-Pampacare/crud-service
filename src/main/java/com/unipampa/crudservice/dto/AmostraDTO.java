@@ -6,8 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
 import java.util.List;
+
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
@@ -15,13 +16,30 @@ import java.util.List;
 @NoArgsConstructor
 public class AmostraDTO {
 
-    @NotBlank
-    private Proprietario proprietario;
+    private Long numero;
 
     @NotBlank
-    private Localizacao localizacoes;
+    private Boolean lvc;
+
+    @NotBlank
+    private Boolean morreu;
 
     @NotBlank
     private List<Cao> caes;
 
+    @NotBlank
+
+    private Proprietario proprietario;
+
+    @NotBlank
+    private List<Sintoma> sintomas;
+
+    @NotBlank
+    private List<Exame> exames;
+
+    @NotBlank
+    private Acao acao;
+
+    @NotBlank
+    private Amostra amostra;
 }
