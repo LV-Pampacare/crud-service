@@ -1,7 +1,5 @@
 server:
-  port: 8082
-  servlet:
-    context-path: /crudService
+  port: 8081
 
 spring:
   application:
@@ -16,13 +14,15 @@ spring:
   jmx:
     enabled: false
   datasource:
-    url: jdbc:mysql://localhost:3306/pampacare_db?useTimezone=true&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/database?useTimezone=true&serverTimezone=UTC
     username: root
-    password: admin
+    password: password
 
 eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
   instance:
     hostname: localhost
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/eureka

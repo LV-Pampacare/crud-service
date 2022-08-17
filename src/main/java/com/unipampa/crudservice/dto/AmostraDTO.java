@@ -16,12 +16,25 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class AmostraDTO {
 
+    private Long numero;
+
+    @NotBlank
+    private Boolean lvc;
+
+    @NotBlank
+    private Boolean morreu;
 
     @NotBlank
     private List<Cao> caes;
 
     @NotBlank
     private Proprietario proprietario;
+
+    @NotBlank
+    private List<Sintoma> sintomas;
+
+    @NotBlank
+    private List<Exame> exames;
 
     @NotBlank
     private Acao acao;

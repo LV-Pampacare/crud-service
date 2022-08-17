@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/amostra")
@@ -23,21 +22,26 @@ public class AmostraController {
     private IProprietarioService proprietarioService;
 
     @Autowired
+    private ILocalizacaoService localizacaoService;
+
+    @Autowired
     private IExameService exameService;
 
     @Autowired
     private ISintomaService sintomaService;
 
-    @Autowired
-    private IAmostraService amostraService;
 
+<<<<<<< HEAD
     @Autowired
     private IAcaoService acaoService;
 
+=======
+>>>>>>> b593bd38b4399ffdcd09b095227b945ecdaa9ff1
     @PostMapping("/inserir")
     public void salvarGeral(@RequestBody AmostraDTO dto){
 
         Proprietario proprietario = caputurarProprietario(dto);
+<<<<<<< HEAD
 
         Amostra amostra = caputurarAmostra(dto);
 
@@ -50,14 +54,20 @@ public class AmostraController {
 
         salvarCaes(caes);
         acaoService.salvarAcao(acao);
+=======
+
+
+>>>>>>> b593bd38b4399ffdcd09b095227b945ecdaa9ff1
         proprietarioService.salvarProprietario(proprietario);
-        amostraService.salvarAmostra(amostra);
     }
 
     public void salvarCaes(List<Cao> caes){
         caes.stream().forEach(e -> caoService.salvarCao(e));
     }
 
+    public void salvarLocalizacoes(List<Localizacao> localizacoes){
+        localizacoes.stream().forEach(e -> localizacaoService.salvarLocalizacao(e));
+    }
 
     public void salvarSintomas(List<Sintoma> sintomas){
         sintomas.stream().forEach(e -> sintomaService.salvarSintoma(e));
@@ -72,15 +82,11 @@ public class AmostraController {
         return amostra;
     }
 
-    public Acao capturarAcao(AmostraDTO dto){
-        Acao acao = new Acao();
-        acao.setNome(dto.getAcao().getNome());
-        return acao;
-    }
 
     public Proprietario caputurarProprietario(AmostraDTO dto){
         Proprietario proprietario = new Proprietario();
         proprietario.setNome(dto.getProprietario().getNome());
+        proprietario.setNumCartaoSus(dto.getProprietario().getNumCartaoSus());
         return proprietario;
     }
 }
