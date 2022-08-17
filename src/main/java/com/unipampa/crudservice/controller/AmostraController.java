@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/salvar")
+@RequestMapping(value = "/amostra")
 public class AmostraController {
 
     @Autowired
@@ -34,24 +34,21 @@ public class AmostraController {
     @Autowired
     private IAcaoService acaoService;
 
-    @PostMapping("/geral")
+    @PostMapping("/inserir")
     public void salvarGeral(@RequestBody AmostraDTO dto){
 
         Proprietario proprietario = caputurarProprietario(dto);
-        Acao acao = capturarAcao(dto);
+
         Amostra amostra = caputurarAmostra(dto);
 
-        List<Exame> exames = dto.getExames().stream().collect(Collectors.toList());
-        List<Sintoma> sintomas = dto.getSintomas().stream().collect(Collectors.toList());
+        Acao acao = capturarAcao(dto);
+
         List<Cao> caes = dto.getProprietario().getCaes().stream().collect(Collectors.toList());
 
         proprietario.setCaes(caes);
-        amostra.setExames(exames);
         amostra.setAcao(acao);
 
         salvarCaes(caes);
-        salvarExames(exames);
-        salvarSintomas(sintomas);
         acaoService.salvarAcao(acao);
         proprietarioService.salvarProprietario(proprietario);
         amostraService.salvarAmostra(amostra);
@@ -72,8 +69,6 @@ public class AmostraController {
 
     public Amostra caputurarAmostra(AmostraDTO dto){
         Amostra amostra = new Amostra();
-        amostra.setLvc(dto.getAmostra().getLvc());
-        amostra.setMorreu(dto.getAmostra().getMorreu());
         return amostra;
     }
 
