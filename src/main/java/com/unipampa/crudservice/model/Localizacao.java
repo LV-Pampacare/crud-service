@@ -33,6 +33,6 @@ public class Localizacao {
   private Float longitude;
 
   @OneToOne
-  @JoinColumn(name = "cao_id")
-  private Cao cao;
+  @JoinColumn(name = "proprietario_id")
+  private Proprietario proprietario;
 }

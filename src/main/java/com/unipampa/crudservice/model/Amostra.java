@@ -6,9 +6,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -32,11 +30,7 @@ public class Amostra {
   @OneToOne
   private Acao acao;
 
-  @OneToMany(mappedBy = "sintoma", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<AmostraSintoma> sintomas = new ArrayList<AmostraSintoma>();
 
-  @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<Exame> exames = new ArrayList<Exame>();
 
 
 }

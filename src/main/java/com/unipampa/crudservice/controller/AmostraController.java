@@ -26,63 +26,57 @@ public class AmostraController {
     private ILocalizacaoService localizacaoService;
 
     @Autowired
-    private IExameService exameService;
-
-    @Autowired
-    private ISintomaService sintomaService;
-
-    @Autowired
-    private IAcaoService acaoService;
+    private ICaoSintomaService caoSintomaService;
 
     @PostMapping("/inserir")
     public void salvarGeral(@RequestBody AmostraDTO dto) {
+        Proprietario proprietario = capturarProprietario(dto);
 
-        Proprietario proprietario = caputurarProprietario(dto);
-
-        Amostra amostra = caputurarAmostra(dto);
-
-        Acao acao = caputurarAcao(dto);
-
+        capturarAmostra(dto);
         List<Cao> caes = dto.getProprietario().getCaes().stream().collect(Collectors.toList());
-
         proprietario.setCaes(caes);
-        amostra.setAcao(acao);
-
-        salvarCaes(caes);
-        acaoService.salvarAcao(acao);
-
+        salvarLocalizacao(dto.getProprietario().getLocalizacao());
         proprietarioService.salvarProprietario(proprietario);
+        salvarCaes(caes, proprietario);
     }
 
-    public void salvarCaes(List<Cao> caes) {
-        caes.stream().forEach(e -> caoService.salvarCao(e));
+    public void salvarCaes(List<Cao> caes, Proprietario proprietario) {
+        for (Cao cao : caes) {
+            cao.setProprietario(proprietario);
+            Cao caoInserido = caoService.salvarCao(cao);
+            System.out.println(caoInserido.toString());
+            // salvarSintomas(caoInserido);
+        }
     }
 
-    public void salvarLocalizacoes(List<Localizacao> localizacoes) {
-        localizacoes.stream().forEach(e -> localizacaoService.salvarLocalizacao(e));
+    public void salvarLocalizacao(Localizacao localizacao) {
+        localizacaoService.salvarLocalizacao(localizacao);
     }
 
-    public void salvarSintomas(List<Sintoma> sintomas) {
-        sintomas.stream().forEach(e -> sintomaService.salvarSintoma(e));
+    public void salvarSintomas(Cao cao) {
+        List<CaoSintoma> sintomas = cao.getSintomas();
+        for (CaoSintoma sintoma : sintomas) {
+            sintoma.setCao(cao);
+            caoSintomaService.salvarSintoma(sintoma);
+        }
     }
 
-    public void salvarExames(List<Exame> exames) {
-        exames.stream().forEach(e -> exameService.salvarExame(e));
+    public void salvarExames(Cao cao) {
     }
 
-    public Amostra caputurarAmostra(AmostraDTO dto) {
+    public Amostra capturarAmostra(AmostraDTO dto) {
         Amostra amostra = new Amostra();
         return amostra;
     }
 
-    public Proprietario caputurarProprietario(AmostraDTO dto) {
+    public Proprietario capturarProprietario(AmostraDTO dto) {
         Proprietario proprietario = new Proprietario();
         proprietario.setNome(dto.getProprietario().getNome());
         proprietario.setNumCartaoSus(dto.getProprietario().getNumCartaoSus());
         return proprietario;
     }
 
-    public Acao caputurarAcao(AmostraDTO dto) {
+    public Acao capturarAcao(AmostraDTO dto) {
         Acao acao = new Acao();
         acao.setNome(dto.getAcao().getNome());
         return acao;

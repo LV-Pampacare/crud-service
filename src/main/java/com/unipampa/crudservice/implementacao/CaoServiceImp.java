@@ -13,7 +13,7 @@ public class CaoServiceImp implements ICaoService {
     private CaoRepository repository;
 
     @Override
-    public void salvarCao(Cao cao) {
-        repository.save(cao);
+    public Cao salvarCao(Cao cao) {
+        return repository.save(cao);
     }
 }

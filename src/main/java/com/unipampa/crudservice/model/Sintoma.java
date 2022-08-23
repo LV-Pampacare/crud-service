@@ -21,6 +21,6 @@ public class Sintoma {
   @Column(nullable = false, length = 50)
   private String nome;
 
-  @OneToMany(mappedBy = "amostra", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AmostraSintoma> amostras = new ArrayList<AmostraSintoma>();
+  @OneToMany(mappedBy = "cao", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CaoSintoma> caes = new ArrayList<CaoSintoma>();
 }

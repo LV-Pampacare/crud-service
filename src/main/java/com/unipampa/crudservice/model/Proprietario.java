@@ -26,4 +26,14 @@ public class Proprietario {
 
   @OneToMany(mappedBy = "proprietario", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Cao> caes = new ArrayList<Cao>();
+
+  @OneToOne(mappedBy = "proprietario", cascade = CascadeType.ALL)
+  @PrimaryKeyJoinColumn
+  private Localizacao localizacao;
+
+  @Override
+  public String toString() {
+    return "Proprietario [caes=" + caes + ", id=" + id + ", localizacao=" + localizacao + ", nome=" + nome
+        + ", numCartaoSus=" + numCartaoSus + "]";
+  }
 }

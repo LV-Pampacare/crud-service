@@ -4,5 +4,5 @@ import com.unipampa.crudservice.model.Cao;
 
 public interface ICaoService {
 
-    public void salvarCao(Cao cao);
+    public Cao salvarCao(Cao cao);
 }

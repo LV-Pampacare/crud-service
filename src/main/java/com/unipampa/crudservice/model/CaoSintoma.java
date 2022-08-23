@@ -20,8 +20,8 @@ public class CaoSintoma {
   private CaoSintomaId id;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @MapsId("amostraId")
-  private Amostra amostra;
+  @MapsId("caoId")
+  private Cao cao;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @MapsId("sintomaId")
@@ -31,11 +31,10 @@ public class CaoSintoma {
 
   private int intensidade;
 
-  public CaoSintoma(Amostra amostra, Sintoma sintoma, int intensidade) {
-    this.amostra = amostra;
+  public CaoSintoma(Cao cao, Sintoma sintoma) {
+    this.cao = cao;
     this.sintoma = sintoma;
-    this.intensidade = intensidade;
-    this.id = new CaoSintomaId(amostra.getId(), sintoma.getId());
+    this.id = new CaoSintomaId(cao.getId(), sintoma.getId());
   }
 
 }
