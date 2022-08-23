@@ -4,20 +4,19 @@ import com.unipampa.crudservice.dto.AmostraDTO;
 import com.unipampa.crudservice.interfaces.*;
 import com.unipampa.crudservice.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/amostra")
 public class AmostraController {
 
-    @Autowired
-    private ICaoService caoService;
 
     @Autowired
     private IProprietarioService proprietarioService;
@@ -29,27 +28,29 @@ public class AmostraController {
     private ICaoSintomaService caoSintomaService;
 
     @PostMapping("/inserir")
-    public void salvarGeral(@RequestBody AmostraDTO dto) {
+    public ResponseEntity<String> salvarGeral(@RequestBody AmostraDTO dto) {
         Proprietario proprietario = capturarProprietario(dto);
 
-        capturarAmostra(dto);
-        List<Cao> caes = dto.getProprietario().getCaes().stream().collect(Collectors.toList());
-        proprietario.setCaes(caes);
-        salvarLocalizacao(dto.getProprietario().getLocalizacao());
+        // capturarAmostra(dto);
+        // List<Cao> caes = dto.getProprietario().getCaes().stream().collect(Collectors.toList());
+        // proprietario.setCaes(caes);
         proprietarioService.salvarProprietario(proprietario);
-        salvarCaes(caes, proprietario);
+        // salvarLocalizacao(dto.getProprietario().getLocalizacao(), proprietario);
+        // salvarCaes(caes, proprietario);
+        return new ResponseEntity<String>("Amostra Registrada", HttpStatus.OK);
     }
 
     public void salvarCaes(List<Cao> caes, Proprietario proprietario) {
         for (Cao cao : caes) {
             cao.setProprietario(proprietario);
-            Cao caoInserido = caoService.salvarCao(cao);
-            System.out.println(caoInserido.toString());
+            // Cao caoInserido = caoService.salvarCao(cao);
+            // System.out.println(caoInserido.toString());
             // salvarSintomas(caoInserido);
         }
     }
 
-    public void salvarLocalizacao(Localizacao localizacao) {
+    public void salvarLocalizacao(Localizacao localizacao, Proprietario proprietario) {
+        localizacao.setProprietario(proprietario);
         localizacaoService.salvarLocalizacao(localizacao);
     }
 
