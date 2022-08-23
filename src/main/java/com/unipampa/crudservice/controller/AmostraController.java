@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/amostra")
@@ -30,22 +31,17 @@ public class AmostraController {
     @Autowired
     private ISintomaService sintomaService;
 
-
-<<<<<<< HEAD
     @Autowired
     private IAcaoService acaoService;
 
-=======
->>>>>>> b593bd38b4399ffdcd09b095227b945ecdaa9ff1
     @PostMapping("/inserir")
-    public void salvarGeral(@RequestBody AmostraDTO dto){
+    public void salvarGeral(@RequestBody AmostraDTO dto) {
 
         Proprietario proprietario = caputurarProprietario(dto);
-<<<<<<< HEAD
 
         Amostra amostra = caputurarAmostra(dto);
 
-        Acao acao = capturarAcao(dto);
+        Acao acao = caputurarAcao(dto);
 
         List<Cao> caes = dto.getProprietario().getCaes().stream().collect(Collectors.toList());
 
@@ -54,22 +50,19 @@ public class AmostraController {
 
         salvarCaes(caes);
         acaoService.salvarAcao(acao);
-=======
 
-
->>>>>>> b593bd38b4399ffdcd09b095227b945ecdaa9ff1
         proprietarioService.salvarProprietario(proprietario);
     }
 
-    public void salvarCaes(List<Cao> caes){
+    public void salvarCaes(List<Cao> caes) {
         caes.stream().forEach(e -> caoService.salvarCao(e));
     }
 
-    public void salvarLocalizacoes(List<Localizacao> localizacoes){
+    public void salvarLocalizacoes(List<Localizacao> localizacoes) {
         localizacoes.stream().forEach(e -> localizacaoService.salvarLocalizacao(e));
     }
 
-    public void salvarSintomas(List<Sintoma> sintomas){
+    public void salvarSintomas(List<Sintoma> sintomas) {
         sintomas.stream().forEach(e -> sintomaService.salvarSintoma(e));
     }
 
@@ -77,16 +70,21 @@ public class AmostraController {
         exames.stream().forEach(e -> exameService.salvarExame(e));
     }
 
-    public Amostra caputurarAmostra(AmostraDTO dto){
+    public Amostra caputurarAmostra(AmostraDTO dto) {
         Amostra amostra = new Amostra();
         return amostra;
     }
 
-
-    public Proprietario caputurarProprietario(AmostraDTO dto){
+    public Proprietario caputurarProprietario(AmostraDTO dto) {
         Proprietario proprietario = new Proprietario();
         proprietario.setNome(dto.getProprietario().getNome());
         proprietario.setNumCartaoSus(dto.getProprietario().getNumCartaoSus());
         return proprietario;
+    }
+
+    public Acao caputurarAcao(AmostraDTO dto) {
+        Acao acao = new Acao();
+        acao.setNome(dto.getAcao().getNome());
+        return acao;
     }
 }

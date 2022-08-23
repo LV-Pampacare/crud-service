@@ -43,4 +43,8 @@ public class Cao {
   @OneToOne(mappedBy = "cao", cascade = CascadeType.ALL)
   @PrimaryKeyJoinColumn
   private Localizacao localizacao;
+
+  @OneToOne(mappedBy = "cao", cascade = CascadeType.ALL)
+  @PrimaryKeyJoinColumn
+  private Acao acao;
 }

@@ -18,4 +18,7 @@ public class Acao {
   @Column(nullable = false, unique = true, length = 50)
   private String nome;
 
+    @OneToOne
+    @JoinColumn(name = "cao_id")
+    private Cao cao;
 }
